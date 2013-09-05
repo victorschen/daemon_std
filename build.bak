@@ -1,0 +1,3 @@
+#!/bin/sh
+#
+g++  -lxml2 -lz -I/usr/include/libxml2 -g -o daemon daemon.cpp

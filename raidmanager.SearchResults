@@ -1,0 +1,35 @@
+---- mdadm Æ¥Åä (8 in 1 ÎÄ¼þ) ----
+singleRaid.h:138
+	strcpy(cmdline,"mdadm -C ");
+	strcat(cmdline,devName);
+	strcat(cmdline," --run");	
+singleRaid.h:143
+     *         Insist  that mdadm run the array, even if some of the components
+     *         appear to be active in another array  or  filesystem.   Normally
+     *         mdadm will ask for confirmation before including such components
+     *         in an array.  This option causes that question to be suppressed.
+	*/
+singleRaid.h:270
+	strcpy(cmdline,"mdadm -A -R ");
+	strcat(cmdline,devName);
+	for(int i = 0;i < raidDiskNum;i++)
+singleRaid.h:301
+	strcpy(cmdline,"mdadm -S ");
+	strcat(cmdline,devName);
+	system(cmdline);
+singleRaid.h:311
+	strcpy(cmdline,"mdadm -a ");
+	strcat(cmdline,devName);
+	strcat(cmdline," ");
+singleRaid.h:322
+	strcpy(cmdline,"mdadm -f ");
+	strcat(cmdline,devName);
+	strcat(cmdline," ");
+singleRaid.h:378
+	strcpy(cmdline,"mdadm -f ");
+	strcat(cmdline,devName);
+	strcat(cmdline," ");
+singleRaid.h:385
+	strcpy(cmdline,"mdadm -r ");
+	strcat(cmdline,devName);
+	strcat(cmdline," ");
