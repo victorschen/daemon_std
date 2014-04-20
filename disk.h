@@ -36,6 +36,7 @@ public:
 	bool getScsiIDByDevName();
 	//bool refreshStatus();
 	bool operator==(Disk& d);
+    string execAndQuery(string &cmd, string &attr, size_t len)
 };
 
 Disk::Disk()
@@ -382,6 +383,31 @@ bool Disk::operator==(Disk& d)
 		return true;
 	else
 		return false;
+}
+string Disk::execAndQuery(string &cmd, string &attr, size_t len)
+{
+    string res;
+    FILE *fp;
+    size_t found;
+    char *p, buff[MAXLINE], des[MAXLINE];
+    if((fp = popen(cmd.c_str(), "r")) == NULL)
+        return res;
+    while(fgets(buff, MAXLINE, fp) != NULL)
+    {
+        cout << buff << endl;
+        if((p = strstr(buff, attr.c_str())) == NULL)
+            continue;
+        size_t attrlen = strlen(p+attr.size());
+        len = len > attrlen?attrlen:len;
+        strncpy(des, p+attr.size(), len);  
+        des[len] = '\0';
+        res = string(des);
+        break;
+    }
+    
+    fclose(fp);
+    return res;
+
 }
 
 #endif
